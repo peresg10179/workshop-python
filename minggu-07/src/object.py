@@ -1,0 +1,2 @@
+class Dog(object):
+    pass
