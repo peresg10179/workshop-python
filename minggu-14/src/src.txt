@@ -1,0 +1,162 @@
+$ python
+>>> dari dataset impor sklearn
+>>> iris = datasetets.load_iris ()
+>>> digit = dataset.load_digits ()
+
+>>> cetak ( digit . data )   
+[[0. 0. 5. ... 0. 0. 0.] 
+[0. 0. 0. ... 10. 0. 0.] 
+[0. 0. 0 ... ... 16. 9. 0.] 
+... 
+[0. 0. 1. ... 6. 0. 0.] 
+[0. 0. 2. ... 12. 0. 0.] 
+[0 . 0. 10. ... 12. 1. 0.]]
+
+>>> digit . array target 
+([0, 1, 2, ..., 8, 9, 8])
+
+>>> digit . gambar [ 0 ]   
+larik ([[0,, 0., 5., 13., 9., 1., 0., 0.], 
+       [0., 0., 13., 15., 10., 15, 15 ., 5., 0.], 
+       [0., 3., 15., 2., 0., 11., 8., 0.], 
+       [0., 4., 12., 0., 0. , 8., 8., 0.], 
+       [0., 5., 8., 0., 0., 9., 8., 0.], 
+       [0., 4., 11., 0., 1., 12., 7., 0.], 
+       [0., 2., 14., 5., 10., 12., 0., 0.], 
+       [0., 0., 6., 13 ., 10., 0., 0., 0.]]
+	   
+>>> dari  sklearn  impor  svm 
+>>> CLF  =  svm . SVC ( gamma = 0,001 ,  C = 100. 
+
+>>> clf . fit ( digit . data [: - 1 ],  digit . target [: - 1 ])   
+SVC (C = 100.0, cache_size = 200, class_weight = Tidak ada, coef0 = 0.0, 
+  decision_function_shape = 'ovr', degree = 3, gamma = 0,001, kernel = 'rbf', 
+  max_iter = -1, probabilitas = Salah, random_state = Tidak ada, menyusut = Benar, 
+  tol = 0,001, verbose = Salah)
+  
+  >>> clf . prediksi array ( digit . data [ - 1 :]) 
+([8])
+
+>>> dari  sklearn  impor  svm 
+>>> dari  sklearn  impor  dataset 
+>>> CLF  =  svm . SVC ( gamma = 'scale' ) 
+>>> iris  =  dataset . load_iris () 
+>>> X ,  y  =  iris . data ,  iris . target 
+>>> clf . cocok ( X ,  y )  
+SVC (C = 1.0, cache_size = 200, class_weight = Tidak ada, coef0 = 0.0, 
+  decision_function_shape = 'ovr', derajat = 3, gamma = 'skala', kernel = 'rbf', 
+  max_iter = -1, probabilitas = Salah, random_state = Tidak ada, menyusut = Benar, 
+  tol = 0,001, verbose = Salah)
+
+>>> impor  acar 
+>>> s  =  acar . dumps ( clf ) 
+>>> clf2  =  acar . beban ( s ) 
+>>> clf2 . prediksi array ( X [ 0 : 1 ]) 
+([0]) 
+>>> y [ 0 ] 
+0
+
+
+>>> dari  dump impor joblib  , muat >>> dump ( clf , 'filename.joblib' )  
+  
+  
+  >>> clf  =  load ( 'filename.joblib' )
+  
+  >>> impor  numpy  sebagai  np 
+>>> dari  sklearn  import  random_projection
+
+>>> rng  =  np . acak . RandomState ( 0 ) 
+>>> X  =  rng . rand ( 10 ,  2000 ) 
+>>> X  =  np . Array ( X ,  dtype = 'float32' ) 
+>>> X . dtype 
+dtype ('float32')
+
+>>> transformer  =  proyeksi acak_ . GaussianRandomProjection () 
+>>> X_new  =  transformator . fit_transform ( X ) 
+>>> X_new . dtype 
+dtype ('float64')
+
+Target regresi dilemparkan ke float64dan target klasifikasi dipertahankan:
+
+>>>
+>>> dari  sklearn  import  dataset 
+>>> dari  sklearn.svm  import  SVC 
+>>> iris  =  dataset . load_iris () 
+>>> clf  =  SVC ( gamma = 'scale' ) 
+>>> clf . muat ( iris . Data ,  iris . Target )   
+SVC (C = 1,0, cache_size = 200, class_weight = None, coef0 = 0,0, 
+  decision_function_shape = 'ovr', derajat = 3, gamma = 'skala', kernel = 'RBF',
+  max_iter = -1, probabilitas = Salah, random_state = Tidak ada, menyusut = Benar, 
+  tol = 0.001, verbose = Salah)
+
+>>> daftar ( CLF . Memprediksi ( iris . Data [: 3 ])) 
+[0, 0, 0]
+
+>>> clf . fit ( iris . Data ,  iris . target_names [ iris . Target ])   
+SVC (C = 1,0, cache_size = 200, class_weight = None, coef0 = 0,0, 
+  decision_function_shape = 'ovr', derajat = 3, gamma = 'skala', kernel = 'rbf', 
+  max_iter = -1, probabilitas = Salah, random_state = Tidak ada, menyusut = Benar, 
+  tol = 0,001, verbose = Salah)
+
+>>> daftar ( CLF . Memprediksi ( iris . Data [: 3 ]))   
+[ 'Setosa', 'Setosa', 'Setosa']
+
+
+>>> impor  numpy  sebagai  np 
+>>> dari  sklearn.svm  import  SVC
+
+>>> rng  =  np . acak . RandomState ( 0 ) 
+>>> X  =  rng . rand ( 100 ,  10 ) 
+>>> y  =  rng . binomial ( 1 ,  0,5 ,  100 ) 
+>>> X_test  =  rng . rand ( 5 ,  10 )
+
+>>> clf  =  SVC () 
+>>> clf . set_params ( kernel = 'linear' ) . cocok ( X ,  y )   
+SVC (C = 1.0, cache_size = 200, class_weight = None, coef0 = 0.0, 
+  decision_function_shape = 'ovr', derajat = 3, gamma = 'auto_deprecated', 
+  kernel = 'linear', max_iter = -1 , probabilitas = Salah, random_state = Tidak ada, 
+  menyusut = Benar, tol = 0.001, verbose = Salah) 
+>>> clf . prediksi array ( X_test ) 
+([1, 0, 1, 1, 0])
+
+>>> clf . set_params ( kernel = 'rbf' ,  gamma = 'scale' ) . cocok ( X ,  y )   
+SVC (C = 1.0, cache_size = 200, class_weight = None, coef0 = 0.0, 
+  decision_function_shape = 'ovr', derajat = 3, gamma = 'skala', kernel = 'rbf', 
+  max_iter = -1 , probabilitas = Salah, random_state = Tidak ada, menyusut = Benar, 
+  tol = 0.001, verbose = Salah) 
+>>> clf . prediksi array ( X_test ) 
+([1, 0, 1, 1, 0])
+
+
+>>> dari  sklearn.svm  impor  SVC 
+>>> dari  sklearn.multiclass  import  OneVsRestClassifier 
+>>> dari  sklearn.preprocessing  import  LabelBinarizer
+
+>>> X  =  [[ 1 ,  2 ],  [ 2 ,  4 ],  [ 4 ,  5 ],  [ 3 ,  2 ],  [ 3 ,  1 ]] 
+>>> y  =  [ 0 ,  0 ,  1 ,  1 ,  2 ]
+
+>>> classif  =  OneVsRestClassifier ( estimator = SVC ( gamma = 'skala' , 
+...                                             random_state = 0 )) 
+>>> classif . cocok ( X ,  y ) . prediksi array ( X ) 
+([0, 0, 1, 1, 2])
+
+
+>>> y  =  LabelBinarizer () . fit_transform ( y ) 
+>>> classif . cocok ( X ,  y ) . prediksi array ( X ) 
+([[1, 0, 0], 
+       [1, 0, 0], 
+       [0, 1, 0], 
+       [0, 0, 0], 
+       [0, 0, 0]])
+	   
+	   >>> dari  sklearn.preprocessing  impor  MultiLabelBinarizer 
+>>> y  =  [[ 0 ,  1 ],  [ 0 ,  2 ],  [ 1 ,  3 ],  [ 0 ,  2 ,  3 ],  [ 2 ,  4 ]] 
+>>> y  =  MultiLabelBinarizer () . fit_transform ( y ) 
+>>> classif . cocok ( X ,  y ). prediksi array ( X ) 
+([[1, 1, 0, 0, 0], 
+       [1, 0, 1, 0, 0], 
+       [0, 1, 0, 1, 0], 
+       [1, 0, 1, 0, 0], 
+       [1, 0, 1, 0, 0]])
+	   
+	   
