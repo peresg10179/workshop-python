@@ -1,199 +1,129 @@
+10 Menit ke panda 
+Ini adalah pengantar singkat untuk panda, terutama ditujukan untuk pengguna baru. Anda dapat melihat resep yang lebih kompleks di Cookbook .
 
-Apa yang baru
-Mulai
-Pelacak Isu
-Lisensi
-Pedoman Berkontribusi
-DAPATKAN BUKUNYA
-Python untuk Analisis Data
-ALAT TERKAIT
-SciPy
-NumPy
-Model Stats
-scikit-belajar
-Jupyter
-matplotlib
-Pustaka Analisis Data Python 
-panda adalah open source, perpustakaan berlisensi BSD menyediakan kinerja tinggi,
- struktur data yang mudah digunakan dan alat analisis data untuk bahasa pemrograman Python .
+Biasanya, kami mengimpor sebagai berikut:
 
-panda adalah proyek yang disponsori NumFOCUS . 
-Ini akan membantu memastikan keberhasilan pengembangan panda sebagai proyek sumber terbuka kelas dunia, 
-dan memungkinkan untuk disumbangkan ke proyek
+Pembuatan Objek 
+Lihat bagian Intro Struktur Data .
 
-v0.23.4 Final (3 Agustus 2018) 
-Ini adalah rilis minor perbaikan bug dalam seri 0.23.x dan mencakup beberapa perbaikan regresi, 
-perbaikan bug, dan peningkatan kinerja. Kami menyarankan agar semua pengguna meningkatkan ke versi ini.
+Membuat Seriesdengan melewati daftar nilai, membiarkan panda membuat indeks integer default
 
-Rilis ini dapat diinstal dengan conda dari conda-forge atau saluran default
+Membuat DataFramedengan melewatkan array NumPy, dengan indeks datetime dan label berlabel:
+Menciptakan DataFramedengan melewatkan dict objek yang dapat dikonversi menjadi seperti seri.
+Kolom yang dihasilkan DataFramememiliki dtypes yang berbeda .
+Jika Anda menggunakan IPython, penyelesaian tab untuk nama kolom (serta atribut publik) secara otomatis diaktifkan. Berikut adalah subset dari atribut yang akan diselesaikan:
 
-Atau melalui PyPI:
+Seperti yang Anda lihat, kolom A, B, C, dan Dsecara otomatis tab selesai. Eada di sana juga; atribut lainnya telah dipotong untuk singkatnya
 
+Melihat Data 
+Lihat bagian Dasar - Dasar .
 
-v0.23.4 (3 Agustus 2018)
-Ini adalah rilis minor perbaikan bug dalam seri 0.23.x dan mencakup beberapa perbaikan regresi kecil dan perbaikan bug.
- Kami menyarankan agar semua pengguna meningkatkan ke versi ini.
- 
- Apa yang baru di v0.23.4
+Berikut ini cara melihat baris atas dan bawah dari frame
 
-Memperbaiki Regresi
-Perbaikan kerusakan
+Menampilkan indeks, kolom, dan data NumPy yang mendasarinya:
 
-Memperbaiki Regresi ¶
-Python 3.7 dengan Windows memberikan semua nilai yang hilang untuk perhitungan varians bergulir ( GH21813 )
+describe() memperlihatkan ringkasan statistik cepat dari data Anda:
 
-Perbaikan Bug 
-Groupby / Resample / Rolling
+Transpos data Anda
 
-Bug saat memanggil DataFrameGroupBy.agg()dengan daftar fungsi termasuk ohlcsebagai 
-elemen non-awal akan memunculkan ValueError( GH21716 )
-Bug dalam roll_quantilemenyebabkan kebocoran memori saat memanggil .rolling(...).
-quantile(q)dengan qdalam (0,1) ( GH21965 )
-Tidak ada
+Menyortir berdasarkan sumbu:
+Mengurutkan berdasarkan nilai:
 
-Bug di Series.clip()dan DataFrame.clip()tidak dapat menerima ambang seperti daftar yang berisi NaN( GH19992 )
+Seleksi 
+Catatan Sementara standar ekspresi Python / Numpy untuk memilih dan pengaturan yang intuitif dan berguna untuk bekerja interaktif, untuk kode produksi, kami merekomendasikan metode akses panda dioptimalkan data, .at, .iat, .locdan .iloc.
+Lihat dokumentasi pengindeksan Pengindeksan dan Memilih Data dan MultiIndex / Pengindeksan Lanjut .
 
-v0.23.3 (7 Juli 2018) 
-Rilis ini memperbaiki masalah build dengan sdist untuk Python 3.7 ( GH21785 ) Tidak ada perubahan lain.
+Mendapatkan 
+Memilih satu kolom, yang menghasilkan Series, setara dengan df.A:
+Memilih melalui [], yang mengiris baris.
+Pilihan dengan Label 
+Lihat lebih banyak di Seleksi oleh Label .
 
-v0.23.2 
-Ini adalah rilis minor perbaikan bug dalam seri 0.23.x dan mencakup beberapa perbaikan regresi kecil dan perbaikan bug.
- Kami menyarankan agar semua pengguna meningkatkan ke versi ini.
- 
- Pengurangan Logis atas Seluruh DataFrame ¶
-DataFrame.all()dan DataFrame.any()sekarang menerima axis=Noneuntuk mengurangi dari semua sumbu ke skalar ( GH19976 )
+Untuk mendapatkan potongan melintang menggunakan label
 
-ni juga menyediakan kompatibilitas dengan NumPy 1.15, yang sekarang dikirim ke DataFrame.all. Dengan NumPy 1.15 dan panda 0.23.1 atau lebih lama, 
-numpy.all()tidak akan lagi mengurangi setiap sumbu:
+Memilih pada multi-sumbu dengan label:
 
-Dengan panda 0.23.2, itu akan mengembalikan False dengan benar, seperti yang terjadi pada NumPy <1.15.
+Menampilkan pengirisan label, kedua titik akhir disertakan :
+Pengurangan dalam dimensi objek yang dikembalikan:
+Untuk mendapatkan nilai skalar:
+Untuk mendapatkan akses cepat ke skalar (setara dengan metode sebelumnya):
+Seleksi berdasarkan Posisi 
+Lihat lebih banyak di Seleksi oleh Posisi .
 
-In [3]: np.any(pd.DataFrame({"A": [False], "B": [False]}))
-Out[3]: False
+Pilih melalui posisi bilangan bulat yang dilewati:
+Pengaturan ¶
+Mengatur kolom baru secara otomatis menyelaraskan data dengan indeks.
 
-Memperbaiki Regresi 
-Memperbaiki regresi to_csv()ketika menangani objek seperti file secara tidak benar ( GH21471 )
-Diizinkan ulang nama tingkat duplikat a MultiIndex. Mengakses level yang memiliki nama duplikat berdasarkan nama masih menimbulkan kesalahan ( GH19029 ).
-Bug di keduanya DataFrame.first_valid_index()dan Series.first_valid_index()dibesarkan untuk indeks baris yang memiliki nilai duplikat ( GH21441 )
-Memperbaiki pencetakan DataFrames dengan kolom hierarkis dengan nama panjang ( GH21180 )
-Memperbaiki regresi dalam reindex()dan groupby() dengan MultiIndex atau beberapa kunci yang berisi nilai seperti waktu-kategoris ( GH21390 ).
-Memperbaiki regresi dalam operasi negatif unary dengan objek tipe ( GH21380 )
-Bug Timestamp.ceil()dan Timestamp.floor()ketika cap waktu merupakan kelipatan dari frekuensi pembulatan ( GH21262 )
-Memperbaiki regresi dalam to_clipboard()yang default untuk menyalin dataframe dengan ruang terbatas bukan tab dibatasi ( GH21104 )
+Data Tidak Ada 
+panda terutama menggunakan nilai np.nanuntuk mewakili data yang hilang. Secara default tidak termasuk dalam perhitungan. Lihat bagian Data Yang Hilang .
 
-Bangun Perubahan 
-Distribusi sumber dan biner tidak lagi menyertakan file data uji, menghasilkan ukuran unduhan yang lebih kecil. Tes yang mengandalkan file data ini akan dilewati saat menggunakan pandas.test(). ( GH19320 )
-Perbaikan Bug 
-Konversi
+Reindexing memungkinkan Anda untuk mengubah / menambah / menghapus indeks pada sumbu yang ditentukan. Ini mengembalikan salinan data.
 
-Bug saat membangun Indexdengan iterator atau generator ( GH21470 )
-Bug masuk Series.nlargest()untuk dtip integer yang masuk dan tidak ditandatangani ketika nilai minimum ada ( GH21426 )
-Pengindeksan
+Operasi 
+Lihat bagian Dasar pada Operasi Biner .
 
-Bug Index.get_indexer_non_unique()dengan kunci kategoris ( GH21448 )
-Bug dalam operasi perbandingan untuk MultiIndexkesalahan yang muncul pada perbandingan kesetaraan / ketidaksetaraan yang melibatkan MultiIndex dengan ( GH21149 )nlevels == 1
-Bug dalam DataFrame.drop()perilaku tidak konsisten untuk indeks unik dan non-unik ( GH21494 )
-Bug masuk DataFrame.duplicated()dengan sejumlah besar kolom menyebabkan 'kedalaman rekursi maksimum terlampaui' ( GH21524 ).
-I / O
+Statistik 
+Operasi secara umum mengecualikan data yang hilang.
 
-Bug di read_csv()yang menyebabkannya untuk benar meningkatkan kesalahan saat nrows=0, low_memory=Truedan index_coltidak None( GH21141 )
-Bug json_normalize()saat memformat kolom record_prefixdengan bilangan bulat ( GH21536 )
-Kategorikal
+Melakukan statistik deskriptif:
 
-Bug dalam rendering Seriesdengan Categoricaldtype dalam kondisi langka di bawah Python 2.7 ( GH21002 )
-Zona waktu
+Terapkan ¶
+Menerapkan fungsi ke data:
 
-Bug di Timestampdan di DatetimeIndexmana melewati Timestamplokal setelah transisi DST akan mengembalikan datetime sebelum transisi DST ( GH20854 )
-Bug dalam membandingkan kolom dengan transisi DST yang menghasilkan ( GH19970 )DataFrame`s with tz-aware :class:`DatetimeIndexKeyError
-Timedelta
+Histogram ¶
+Lihat lebih lanjut di Histogram dan Diskretisasi .
+Metode String ¶
+Seri dilengkapi dengan serangkaian metode pemrosesan string dalam atribut str yang membuatnya mudah dioperasikan pada setiap elemen array, seperti dalam cuplikan kode di bawah ini. Perhatikan bahwa pencocokan pola di str umumnya menggunakan ekspresi reguler secara default (dan dalam beberapa kasus selalu menggunakannya). Lihat lebih lanjut di Metode String Vektor .
 
-Bug di Timedeltamana timedelta non-nol yang lebih pendek dari 1 mikrodetik dianggap Salah ( GH21484 )
+Gabungkan 
+Concat 
+panda menyediakan berbagai fasilitas untuk dengan mudah menggabungkan bersama-sama Seri, DataFrame, dan objek Panel dengan berbagai jenis logika set untuk indeks dan fungsionalitas aljabar relasional dalam kasus operasi join / merge-type.
 
+Lihat bagian Penggabungan .
 
-v0.23.1 
-Ini adalah rilis minor perbaikan bug dalam seri 0.23.x dan mencakup beberapa perbaikan regresi kecil dan perbaikan bug. Kami menyarankan agar semua pengguna meningkatkan ke versi ini.
+Menggabungkan objek panda bersama dengan concat():
 
-Memperbaiki Regresi 
-Membandingkan Seri dengan datetime.date
+Bergabunglah ¶
+Penggabungan gaya SQL. Lihat bagian penggabungan gaya Database .
 
-Kami telah mengembalikan perubahan 0.23.0 untuk membandingkan data Seriesholding dan datetime.dateobjek ( GH21152 ). 
-Dalam panda 0.22 dan sebelumnya, membandingkan Seri yang menyimpan datetimes dan datetime.dateobjek akan memaksa datetime.dateuntuk datetime sebelum comapring.
- Ini tidak konsisten dengan Python, NumPy, dan DatetimeIndex, yang tidak pernah mempertimbangkan datetime dan datetime.datesama.
+Tambahkan 
+Tambahkan baris ke bingkai data. Lihat bagian Tambah .
+Pengelompokan 
+Dengan "dikelompokkan berdasarkan", kami mengacu pada proses yang melibatkan satu atau lebih langkah-langkah berikut:
 
-Di 0.23.0, kami menyatukan operasi antara DatetimeIndex dan Seri, dan dalam proses itu mengubah perbandingan antara Seri data dan datetime.datetanpa peringatan.
+Membagi data menjadi beberapa kelompok berdasarkan beberapa kriteria
+Menerapkan fungsi untuk setiap grup secara independen
+Menggabungkan hasil ke dalam struktur data
 
-Kami telah memulihkan sementara perilaku 0.22.0, jadi datetimes dan tanggal dapat kembali sama, tetapi mengembalikan perilaku 0.23.0 dalam rilis mendatang.
+Membentuk ulang 
+Lihat bagian tentang Pengindeksan dan Pembentukan Ulang Hirarki .
 
-Untuk meringkas, inilah perilaku di 0.22.0, 0.23.0, 0.23.1:
+Tumpukan 
 
-Selain itu, perbandingan pemesanan akan meningkat TypeErrordi masa mendatang.
+Seri Waktu 
+panda memiliki fungsi yang sederhana, kuat, dan efisien untuk melakukan operasi resampling selama konversi frekuensi (misalnya, mengubah data kedua menjadi data 5-menit). Ini sangat umum dalam, tetapi tidak terbatas pada, aplikasi keuangan. Lihat bagian Time Series 
 
-Perbaikan lainnya
+Konversi antara periode dan cap waktu memungkinkan beberapa fungsi aritmatika yang nyaman untuk digunakan. Dalam contoh berikut, kami mengonversi frekuensi triwulanan dengan tahun yang berakhir pada November hingga 9 pagi di akhir bulan setelah akhir kuartal
+Lihat bagian pada Tabel Pivot .
 
-Mengembalikan kemampuan to_sql()untuk melakukan sisipan multinilai karena ini menyebabkan regresi dalam kasus-kasus tertentu ( GH21103 ). Di masa depan ini akan dibuat dapat dikonfigurasi.
-Memperbaiki regresi dalam DatetimeIndex.datedan DatetimeIndex.time atribut dalam hal data sadar zona waktu: DatetimeIndex.timemengembalikan waktu sadar-tz alih-alih naif ( GH21267 ) dan DatetimeIndex.date mengembalikan tanggal yang salah ketika tanggal input memiliki zona waktu non-UTC ( GH21230 ).
-Memperbaiki regresi pandas.io.json.json_normalize()ketika dipanggil dengan Nonenilai dalam level bersarang di JSON, dan untuk tidak menjatuhkan kunci dengan nilai sebagai Tidak Ada ( GH21158 , GH21356 ).
-Bug dalam to_csv()menyebabkan kesalahan pengodean saat kompresi dan pengodean ditentukan ( GH21241 , GH21118 )
-Bug yang mencegah panda agar tidak dapat diimpor dengan optimasi -OO ( GH21071 )
-Bug dalam Categorical.fillna()salah menaikkan nilaiTypeError ketika kategori individu dapat diubah dan nilai adalah dapat diubah ( GH21097 , GH19788 )
-Memperbaiki regresi dalam konstruktor yang memaksa nilai-nilai NA suka Nonestring ketika lewat dtype=str( GH21083 )
-Regresi di pivot_table()mana perintah Categoricaldengan nilai-nilai yang hilang untuk pivot indexakan memberikan hasil yang tidak selaras ( GH21133 )
-Memperbaiki regresi dalam menggabungkan indeks / kolom boolean ( GH21119 ).
+Kategorikal 
+panda dapat memasukkan data kategorikal dalam a DataFrame. Untuk dokumen lengkap, lihat pengantar kategori dan dokumentasi API .
 
-Peningkatan Kinerja 
-Peningkatan kinerja CategoricalIndex.is_monotonic_increasing(), CategoricalIndex.is_monotonic_decreasing()dan CategoricalIndex.is_monotonic()( GH21025 )
-Peningkatan kinerja CategoricalIndex.is_unique()( GH21107 )
-Perbaikan Bug 
-Groupby / Resample / Rolling
+Merencanakan ¶
+Lihat Plotting docs.
 
-Bug di DataFrame.agg()mana menerapkan beberapa fungsi agregasi ke DataFramedengan nama kolom yang digandakan akan menyebabkan stack overflow ( GH21063 )
-Bug di pandas.core.groupby.GroupBy.ffill()dan pandas.core.groupby.GroupBy.bfill()tempat pengisian dalam pengelompokan tidak akan selalu diterapkan sebagaimana dimaksud karena penggunaan implementasi jenis yang tidak stabil ( GH21207 )
-Bug di pandas.core.groupby.GroupBy.rank()mana hasil tidak menskala hingga 100% saat menentukan method='dense'danpct=True
-Bug di pandas.DataFrame.rolling()dan pandas.Series.rolling()yang menerima ukuran jendela 0 salah daripada menaikkan ( GH21286 )
-Tipe data spesifik
+Mendapatkan Data Masuk / Keluar 
+CSV 
+Menulis ke file csv.
+HDF5 
+Membaca dan menulis ke HDFStores .
 
-Bug di Series.str.replace()mana metode melempar TypeError pada Python 3.5.2 ( GH21078 )
-Bug di Timedelta: di mana melewati pelampung dengan unit akan secara prematur memutari presisi pelampung ( GH14156 )
-Bug pandas.testing.assert_index_equal()yang AssertionErrorsalah mengangkat , saat membandingkan dua CategoricalIndexobjek dengan param check_categorical=False( GH19776 )
-Jarang
+Menulis ke Toko HDF5.
+Excel 
+Membaca dan menulis ke MS Excel .
 
-Bug SparseArray.shapeyang sebelumnya hanya mengembalikan bentuk SparseArray.sp_values( GH21126 )
-Pengindeksan
+Menulis ke file excel.
 
-Bug di Series.reset_index()mana kesalahan yang sesuai tidak dimunculkan dengan nama level yang tidak valid ( GH20925 )
-Bug interval_range()ketika start/ periodsatau end/ periodsditentukan dengan float startatau end( GH21161 )
-Bug di MultiIndex.set_names()mana kesalahan muncul untuk MultiIndexdengan ( GH21149 )nlevels == 1
-Bug dalam IntervalIndexkonstruktor yang membuat IntervalIndexdata dari kategori tidak didukung sepenuhnya ( GH21243 , GH21253 )
-Bug MultiIndex.sort_index()yang tidak dijamin dapat disortir dengan benar level=1; ini juga menyebabkan ketidakselarasan data dalam DataFrame.stack()operasi tertentu ( GH20994 , GH20945 , GH21052 )
-Merencanakan
-
-Kata kunci baru (sharex, sharey) untuk mengaktifkan / menonaktifkan berbagi sumbu x / y oleh subplot yang dihasilkan dengan panda. DataFrame (). Groupby (). Boxplot () ( GH20968 )
-I / O
-
-Bug dalam metode IO menentukan compression='zip'yang menghasilkan arsip zip terkompresi ( GH17778 , GH21144 )
-Bug DataFrame.to_stata()yang mencegah ekspor DataFrames ke buffer dan sebagian besar objek seperti file ( GH21041 )
-Bug read_stata()dan StataReaderyang tidak mendekodekan string utf-8 dengan benar pada Python 3 dari Stata 14 file (dta versi 118) ( GH21244 )
-Bug di IO JSON yang read_json()membaca skema JSON kosong dengan orient='table'kembali DataFramemenyebabkan kesalahan ( GH21287 )
-Membentuk kembali
-
-Bug concat()tempat kesalahan muncul dalam penyatuan Seriesdengan skalar dan nama tuple numpy ( GH21015 )
-Bug dalam concat()pesan peringatan memberikan panduan yang salah untuk perilaku di masa mendatang ( GH21101 )
-Lain
-
-Tab selesai pada IndexIPython tidak lagi mengeluarkan peringatan penghentian ( GH21125 )
-Bug yang mencegah panda digunakan pada Windows tanpa C ++ diinstal ulang ( GH21106 )
-v0.23.0 (15 Mei 2018) 
-Ini adalah rilis utama dari 0.22.0 dan termasuk sejumlah perubahan API, penghentian, fitur baru, peningkatan, dan peningkatan kinerja bersama dengan sejumlah besar perbaikan bug. Kami menyarankan agar semua pengguna meningkatkan ke versi ini.
-
-Sorotan meliputi:
-
-Format JSON round-trippable dengan orientasi 'table' .
-Instansiasi dari dikte menghormati pesanan untuk Python 3.6+ .
-Argumen kolom tergantung untuk ditugaskan .
-Menggabungkan / menyortir pada kombinasi kolom dan level indeks .
-Memperluas Panda dengan tipe khusus .
-Tidak termasuk kategori yang tidak teramati dari groupby .
-Perubahan untuk membuat bentuk output dari DataFrame.sangat konsisten .
-
-
+Gotchas 
+Jika Anda mencoba melakukan operasi, Anda mungkin melihat pengecualian seperti:
 
